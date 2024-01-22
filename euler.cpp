@@ -4,6 +4,9 @@
 #include <ctime>
 #include <cmath>
 #include <utility>
+#include <vector>
+#include "utils.h"
+
 
 using namespace std;
 
@@ -35,6 +38,7 @@ int main(){
     auto start = chrono::steady_clock::now();
 
     cout << endl;
+
     cout << "e1:   " << e1(1000) << endl;
     cout << "e2:   " << e2(4 * pow(10,6)) << endl;
 
@@ -44,6 +48,8 @@ int main(){
     cout << endl;
     cout << "all completed problems:   " << duration.count() << " milliseconds" << endl;
     cout << endl;
+
+    printVector( Eratosthenes(100) );
 
     return 0;
 }
