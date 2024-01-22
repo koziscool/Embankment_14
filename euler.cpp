@@ -49,7 +49,14 @@ int main(){
     cout << "all completed problems:   " << duration.count() << " milliseconds" << endl;
     cout << endl;
 
-    printVector( Eratosthenes(100) );
+    start = chrono::steady_clock::now();
+    vector<long int> primes = Eratosthenes(pow(10, 7));
+    finish = chrono::steady_clock::now();
+    duration = chrono::duration<double, std::milli>(finish - start);
 
+    cout << duration.count() << " milliseconds" << endl;
+    cout << endl;
+
+    
     return 0;
 }
