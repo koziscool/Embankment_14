@@ -2,6 +2,8 @@
 #include <iostream>
 #include <chrono>
 #include <ctime>
+#include <cmath>
+#include <utility>
 
 using namespace std;
 
@@ -15,10 +17,33 @@ int e1(int limit){
     return total;
 }
 
-
+int e2(int limit){
+    int total = 0;
+    pair<int, int> f(1,2);
+    
+    while (f.second <= limit){
+        if(f.second % 2 == 0)
+            total += f.second;
+        f = { f.second, f.first + f.second };
+    }
+    
+    return total;
+}
 
 int main(){
+
+    auto start = chrono::steady_clock::now();
+
+    cout << endl;
     cout << "e1:   " << e1(1000) << endl;
+    cout << "e2:   " << e2(4 * pow(10,6)) << endl;
+
+    auto finish = chrono::steady_clock::now();
+    auto duration = chrono::duration<double, std::milli>(finish - start);
+
+    cout << endl;
+    cout << "all completed problems:   " << duration.count() << " milliseconds" << endl;
+    cout << endl;
 
     return 0;
 }
