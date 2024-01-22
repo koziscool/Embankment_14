@@ -5,4 +5,4 @@
 using namespace std;
 
 void printVector(vector<long int> a);
-vector<long int> Eratosthenes(long int limit);
+void Eratosthenes(vector<long int>* primes, long int limit);

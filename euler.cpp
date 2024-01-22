@@ -34,14 +34,28 @@ int e2(int limit){
 }
 
 int e7(vector<long int>* primes, int limit){
-    return primes->at(limit -1);
+    return primes->at(limit-1);
+}
+
+long int e10(vector<long int>* primes, int limit){
+    long int total = 0;
+    vector<long int>::iterator i = primes->begin();
+    while( *i < limit ){
+        total += *i;
+        i++;
+    } 
+    return total;
 }
 
 int main(){
 
     auto start = chrono::steady_clock::now();
 
-    vector<long int> primes = Eratosthenes(pow(10, 7));
+    vector<long int> little_primes(1,2);
+    Eratosthenes(&little_primes, 100);
+
+    vector<long int> primes(1,2);
+    Eratosthenes(&primes, pow(10, 7));
 
     auto finish_preprocess = chrono::steady_clock::now();
     auto duration_preprocess = chrono::duration<double, std::milli>(finish_preprocess - start);
@@ -55,7 +69,7 @@ int main(){
     cout << "e1:   " << e1(1000) << endl;
     cout << "e2:   " << e2(4 * pow(10,6)) << endl;
     cout << "e7:   " << e7(&primes, 10001) << endl;
-
+    cout << "e10:   " << e10(&primes, 2 * pow(10,6)) << endl;
 
     auto finish = chrono::steady_clock::now();
     auto duration_problems = chrono::duration<double, std::milli>(finish - start_problems);
@@ -63,6 +77,12 @@ int main(){
     cout << endl;
     cout << "all completed problems:   " << duration_problems.count() << " milliseconds" << endl;
     cout << endl;
+
+    auto duration_total = chrono::duration<double, std::milli>(finish - start);
+    cout << "total runtime:   " << duration_total.count() << " milliseconds" << endl;
+    cout << endl;
+
+
 
     return 0;
 }

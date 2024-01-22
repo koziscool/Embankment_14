@@ -14,7 +14,7 @@ void printVector(vector<long int> a){
     cout << endl;
 }
 
-vector<long int> Eratosthenes(long int limit){
+void Eratosthenes(vector<long int>* primes, long int limit){
     
     vector<bool> primeArray(limit, true);
     for( long int p = 2; p < sqrt(limit); p++){
@@ -24,10 +24,8 @@ vector<long int> Eratosthenes(long int limit){
         }
     }
 
-    vector<long int> primes(1,2);
     for(long int j = 3; j < limit; j += 2 ){
         if (primeArray[j])
-            primes.push_back(j);
+            primes->push_back(j);
     }
-    return primes;
 }
