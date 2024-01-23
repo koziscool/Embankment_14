@@ -51,10 +51,10 @@ int main(){
 
     auto start = chrono::steady_clock::now();
 
-    vector<long int> little_primes(1,2);
+    vector<long int> little_primes;
     Eratosthenes(&little_primes, 100);
 
-    vector<long int> primes(1,2);
+    vector<long int> primes;
     Eratosthenes(&primes, pow(10, 7));
 
     auto finish_preprocess = chrono::steady_clock::now();
@@ -66,10 +66,10 @@ int main(){
 
     auto start_problems = chrono::steady_clock::now();
 
-    cout << "e1:   " << e1(1000) << endl;
-    cout << "e2:   " << e2(4 * pow(10,6)) << endl;
-    cout << "e7:   " << e7(&primes, 10001) << endl;
-    cout << "e10:   " << e10(&primes, 2 * pow(10,6)) << endl;
+    cout << "e1:     " << e1(1000) << endl;
+    cout << "e2:     " << e2(4 * pow(10,6)) << endl;
+    cout << "e7:     " << e7(&primes, 10001) << endl;
+    cout << "e10:    " << e10(&primes, 2 * pow(10,6)) << endl;
 
     auto finish = chrono::steady_clock::now();
     auto duration_problems = chrono::duration<double, std::milli>(finish - start_problems);
