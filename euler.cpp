@@ -33,6 +33,20 @@ int e2(int limit){
     return total;
 }
 
+long int e5(int limit){
+    vector<long int> little_primes;
+    Eratosthenes(&little_primes, limit);
+    long int ret_val = 1;
+    for(auto p: little_primes){
+        long int prime_power = p;
+        while( prime_power * p < limit ){
+            prime_power *= p;
+        }
+        ret_val *= prime_power;
+    }
+    return ret_val;
+}
+
 int e7(vector<long int>* primes, int limit){
     return primes->at(limit-1);
 }
@@ -68,6 +82,7 @@ int main(){
 
     cout << "e1:     " << e1(1000) << endl;
     cout << "e2:     " << e2(4 * pow(10,6)) << endl;
+    cout << "e5:     " << e5(20) << endl;
     cout << "e7:     " << e7(&primes, 10001) << endl;
     cout << "e10:    " << e10(&primes, 2 * pow(10,6)) << endl;
 
