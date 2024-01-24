@@ -33,6 +33,24 @@ int e2(int limit){
     return total;
 }
 
+long int e3(vector<long int>* primes, long int n){
+    long int max_prime = 0;
+    long int remainder = n;
+
+    for(auto p: *primes){
+        if( remainder == 1 || p*p > remainder )
+            break;
+        if( remainder % p == 0 )
+            max_prime = p;
+        while( remainder % p == 0 )
+            remainder /= p;
+    }
+    if (remainder == 1)
+        return max_prime;
+    else
+        return remainder;
+}
+
 long int e5(int limit){
     vector<long int> little_primes;
     Eratosthenes(&little_primes, limit);
@@ -82,6 +100,8 @@ int main(){
 
     cout << "e1:     " << e1(1000) << endl;
     cout << "e2:     " << e2(4 * pow(10,6)) << endl;
+
+    cout << "e5:     " << e3(&primes, 600851475143) << endl;
     cout << "e5:     " << e5(20) << endl;
     cout << "e7:     " << e7(&primes, 10001) << endl;
     cout << "e10:    " << e10(&primes, 2 * pow(10,6)) << endl;
