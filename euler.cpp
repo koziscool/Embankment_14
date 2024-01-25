@@ -5,6 +5,8 @@
 #include <cmath>
 #include <utility>
 #include <vector>
+#include <fstream>
+#include <string>
 #include "utils.h"
 
 
@@ -69,6 +71,48 @@ int e7(vector<long int>* primes, int limit){
     return primes->at(limit-1);
 }
 
+long int e8(int substring_length){
+    ifstream file("e8data.txt");
+    string s, digit_str = ""; 
+    long int this_product, max_product = 0;
+
+    while (getline(file, s))
+    {
+        digit_str += s;
+    }
+
+    for( int i = 0; i < digit_str.length() - substring_length; i++ ){
+        this_product = 1;
+        for( int j = 0; j < substring_length; j++ )
+            this_product *= int( digit_str[ i+j ] - '0' );
+        if( this_product > max_product )
+            max_product = this_product;
+    }
+
+    return max_product;
+}
+
+long int e9(long int limit){
+
+    long int a = 1, b = 2;
+    long double c = sqrt(a*a +b*b);
+
+    while( a + b + c <= limit ){
+        while( a + b + c <= limit ){
+            if( c == int(c) && a + b + c == limit )
+                return a*b*int(c);
+            b += 1;
+            c = sqrt(a*a +b*b);
+        }
+        a += 1;
+        b = a + 1;
+        c = sqrt(a*a +b*b);
+    }
+    
+    return -1;
+}
+
+
 long int e10(vector<long int>* primes, int limit){
     long int total = 0;
     vector<long int>::iterator i = primes->begin();
@@ -100,10 +144,11 @@ int main(){
 
     cout << "e1:     " << e1(1000) << endl;
     cout << "e2:     " << e2(4 * pow(10,6)) << endl;
-
     cout << "e5:     " << e3(&primes, 600851475143) << endl;
     cout << "e5:     " << e5(20) << endl;
     cout << "e7:     " << e7(&primes, 10001) << endl;
+    cout << "e8:     " << e8(13) << endl;
+    cout << "e9:     " << e9(1000) << endl;
     cout << "e10:    " << e10(&primes, 2 * pow(10,6)) << endl;
 
     auto finish = chrono::steady_clock::now();
