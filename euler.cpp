@@ -8,6 +8,7 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include <set>
 #include "utils.h"
 
 
@@ -202,7 +203,30 @@ long int e39(long int limit){
     return retIndex;
 }
 
+long int e42(){
 
+    ifstream file("e42data.txt");
+    string s; 
+    vector<string> words;
+    long int retCounter = 0, maxTriangle = 500;
+
+    while (getline(file, s, ','))
+    {
+        s = s.substr(1, s.length() - 2);
+        words.push_back(s);
+    }
+
+    set<long int> triangleNumbers;
+    for(int i = 1; i <= maxTriangle; i++){
+        triangleNumbers.insert( i*(i+1)/2 );
+    }
+
+    for( string word: words){
+        if( triangleNumbers.find( wordScore(word) )  != triangleNumbers.end() )
+            retCounter++;
+    }
+    return retCounter;
+}
 
 int main(){
 
@@ -235,6 +259,7 @@ int main(){
     cout << "e22:    " << e22() << endl;
     cout << "e28:    " << e28(1001) << endl;
     cout << "e39:    " << e39(1000) << endl;
+    cout << "e42:    " << e42() << endl;
 
     auto finish = chrono::steady_clock::now();
     auto duration_problems = chrono::duration<double, std::milli>(finish - start_problems);
@@ -246,8 +271,6 @@ int main(){
     auto duration_total = chrono::duration<double, std::milli>(finish - start);
     cout << "total runtime:   " << duration_total.count() << " milliseconds" << endl;
     cout << endl;
-
-    cout << wordScore( "DBCA" ) << endl;
 
     return 0;
 }
