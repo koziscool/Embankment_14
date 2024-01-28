@@ -123,6 +123,20 @@ long int e10(vector<long int>* primes, int limit){
     return total;
 }
 
+long int e12(vector<long int>* primes, int limit){
+
+    auto triangle = [](long int n){
+        return n * (n+1) / 2;
+    };
+
+    long int i = 1;
+    while( numFactors(primes, triangle(i) ) <= limit ){
+        i += 1;
+    }
+
+    return triangle(i);
+}
+
 int main(){
 
     auto start = chrono::steady_clock::now();
@@ -150,6 +164,7 @@ int main(){
     cout << "e8:     " << e8(13) << endl;
     cout << "e9:     " << e9(1000) << endl;
     cout << "e10:    " << e10(&primes, 2 * pow(10,6)) << endl;
+    cout << "e12:    " << e12(&primes, 500) << endl;
 
     auto finish = chrono::steady_clock::now();
     auto duration_problems = chrono::duration<double, std::milli>(finish - start_problems);
@@ -162,7 +177,7 @@ int main(){
     cout << "total runtime:   " << duration_total.count() << " milliseconds" << endl;
     cout << endl;
 
-
+    cout << numFactors(&primes, 15) << endl;
 
     return 0;
 }
