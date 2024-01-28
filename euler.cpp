@@ -228,6 +228,24 @@ long int e42(){
     return retCounter;
 }
 
+long int e46(vector<long int>* primes){
+    long int oddCounter = 3;
+    double maybeSquare;
+
+    while(true){
+        for( auto p: *primes){
+            if(p > oddCounter)
+                return oddCounter;
+
+            maybeSquare =  ( oddCounter - p ) / 2; 
+
+            if( sqrt(maybeSquare) == int( sqrt(maybeSquare) ) )
+                break;
+        }
+        oddCounter += 2;
+    }
+}
+
 int main(){
 
     auto start = chrono::steady_clock::now();
@@ -260,6 +278,7 @@ int main(){
     cout << "e28:    " << e28(1001) << endl;
     cout << "e39:    " << e39(1000) << endl;
     cout << "e42:    " << e42() << endl;
+    cout << "e46:    " << e46(&primes) << endl;
 
     auto finish = chrono::steady_clock::now();
     auto duration_problems = chrono::duration<double, std::milli>(finish - start_problems);
