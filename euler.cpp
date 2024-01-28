@@ -173,6 +173,36 @@ long int e28( int gridSize ){
     return retTotal;
 }
 
+long int e39(long int limit){
+
+    long int a = 1, b = 2;
+    double c;
+    map<long int, long int> integerRightTriangles;
+
+    while( sqrt(a*a + b*b) <=  limit ){
+        while( sqrt(a*a + b*b) <=  limit ){
+            c = sqrt(a*a + b*b);
+            if( c == int(c) and a+b+int(c) <= limit )
+                integerRightTriangles[ a+b+int(c) ] += 1;
+            b += 1;
+        }
+        a += 1;
+        b = a + 1;
+    }
+
+    long int retIndex = integerRightTriangles.begin()->first;
+    long int maxValue = integerRightTriangles.begin()->second;
+    for (auto it = integerRightTriangles.begin(); it != integerRightTriangles.end(); it++){
+        if( it->second > maxValue ){
+            retIndex = it->first;
+            maxValue = it->second;
+        }
+    } 
+
+    return retIndex;
+}
+
+
 
 int main(){
 
@@ -204,6 +234,7 @@ int main(){
     cout << "e12:    " << e12(&primes, 500) << endl;
     cout << "e22:    " << e22() << endl;
     cout << "e28:    " << e28(1001) << endl;
+    cout << "e39:    " << e39(1000) << endl;
 
     auto finish = chrono::steady_clock::now();
     auto duration_problems = chrono::duration<double, std::milli>(finish - start_problems);
