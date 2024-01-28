@@ -159,6 +159,20 @@ long int e22(){
     return retTotal;
 }
 
+long int e28( int gridSize ){
+
+    long int numRings = gridSize / 2;
+    int retTotal = 1, bottomRightCorner = 3, increment = 2;
+    
+    for( int _ = 0; _ < numRings; _++ ){
+        retTotal += 4 * bottomRightCorner + 6 * increment;
+        bottomRightCorner += 4*increment + 2;
+        increment += 2;
+    }
+
+    return retTotal;
+}
+
 
 int main(){
 
@@ -189,6 +203,7 @@ int main(){
     cout << "e10:    " << e10(&primes, 2 * pow(10,6)) << endl;
     cout << "e12:    " << e12(&primes, 500) << endl;
     cout << "e22:    " << e22() << endl;
+    cout << "e28:    " << e28(1001) << endl;
 
     auto finish = chrono::steady_clock::now();
     auto duration_problems = chrono::duration<double, std::milli>(finish - start_problems);
