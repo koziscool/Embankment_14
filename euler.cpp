@@ -7,6 +7,7 @@
 #include <vector>
 #include <fstream>
 #include <string>
+#include <algorithm>
 #include "utils.h"
 
 
@@ -137,6 +138,28 @@ long int e12(vector<long int>* primes, int limit){
     return triangle(i);
 }
 
+long int e22(){
+    ifstream file("e22data.txt");
+    string s = ""; 
+    vector<string> names;
+    long int retTotal = 0;
+
+    while (getline(file, s, ','))
+    {
+        s = s.substr(1, s.length() - 2);
+        names.push_back(s);
+    }
+
+    std::sort(names.begin(), names.end());
+
+    for( int i = 0; i < names.size(); i++ ){
+       retTotal += (i+1) * wordScore( names[i] );
+    }
+
+    return retTotal;
+}
+
+
 int main(){
 
     auto start = chrono::steady_clock::now();
@@ -165,6 +188,7 @@ int main(){
     cout << "e9:     " << e9(1000) << endl;
     cout << "e10:    " << e10(&primes, 2 * pow(10,6)) << endl;
     cout << "e12:    " << e12(&primes, 500) << endl;
+    cout << "e22:    " << e22() << endl;
 
     auto finish = chrono::steady_clock::now();
     auto duration_problems = chrono::duration<double, std::milli>(finish - start_problems);
@@ -177,7 +201,7 @@ int main(){
     cout << "total runtime:   " << duration_total.count() << " milliseconds" << endl;
     cout << endl;
 
-    cout << numFactors(&primes, 15) << endl;
+    cout << wordScore( "DBCA" ) << endl;
 
     return 0;
 }

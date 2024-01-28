@@ -3,6 +3,8 @@
 #include <iostream>
 #include <cmath>
 #include <map>
+#include <string>
+
 #include "utils.h"
 
 using namespace std;
@@ -69,6 +71,12 @@ long int numFactors( vector<long int> *primes, long int n ){
     return retVal;
 }
 
+long int wordScore(string s){
+    long int retTotal = 0;
+    for (char c: s)
+        retTotal += int(c) - int('A') + 1;
 
+    return retTotal;
+}
 
 
