@@ -246,6 +246,32 @@ long int e46(vector<long int>* primes){
     }
 }
 
+long int e47(){
+
+    long int consecutiveFourPrimeDivisors = 0;
+
+    for(long int i = 2*3*5*7;; ++i) {
+        long int remainder = i;
+
+        int numPrimeFactors = 1 + !(remainder & 1);
+        
+        for(; !(remainder & 1); remainder >>= 1);
+        
+        for(long int j = 3; j*j < remainder; j += 2) {
+            numPrimeFactors += (remainder % j == 0);
+            for(; remainder % j == 0; remainder /= j);
+        }
+
+        consecutiveFourPrimeDivisors = (consecutiveFourPrimeDivisors + 1) 
+            * (numPrimeFactors == 4);
+        
+        if(consecutiveFourPrimeDivisors == 4) {
+            return i - 3;
+        }
+    }
+}
+
+
 int main(){
 
     auto start = chrono::steady_clock::now();
@@ -279,6 +305,7 @@ int main(){
     cout << "e39:    " << e39(1000) << endl;
     cout << "e42:    " << e42() << endl;
     cout << "e46:    " << e46(&primes) << endl;
+    cout << "e47:    " << e47() << endl;
 
     auto finish = chrono::steady_clock::now();
     auto duration_problems = chrono::duration<double, std::milli>(finish - start_problems);
