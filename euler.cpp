@@ -247,23 +247,51 @@ long int e46(vector<long int>* primes){
 }
 
 long int e47(){
-
     long int consecutiveFourPrimeDivisors = 0;
 
     for(long int i = 2*3*5*7;; ++i) {
+    // 2*3*5*7 is the smallest number with four prime factors
+    // smaller natural numbers can be ignored
+
+
         long int remainder = i;
 
         int numPrimeFactors = 1 + !(remainder & 1);
-        
+        // remainder & 1 is a bitwise bool fn that evaluates to true
+        // if remainder is odd
+
+        // so that line of code says that the number of prime factors
+        // initializes to 1 if remainder is odd, and 2 if remainder is even
+        // ie, 2 and at least one odd prime in remainder / 2
+
+
         for(; !(remainder & 1); remainder >>= 1);
+
+        //  divide out all factors of 2 from remainder until what's left is odd
+
         
         for(long int j = 3; j*j < remainder; j += 2) {
+
+            // j*j must be less than remainder in order to enter the loop
+            // therefore if i is any number other than a 
+            // power of 2, remainder is never allowed to divide all the way to 1.
+            // therefore there will always be a "final" remainder when 
+            // the loop exits and that remainder is necessarily prime
+
             numPrimeFactors += (remainder % j == 0);
+
+            // if j is the smallest odd number dividing remainder
+            // then j is prime
+
             for(; remainder % j == 0; remainder /= j);
+            // divide out all factors of j from remainder
         }
 
         consecutiveFourPrimeDivisors = (consecutiveFourPrimeDivisors + 1) 
             * (numPrimeFactors == 4);
+
+        // numPrimeFactors == 4 is a bool which is cast to 1 in the multiplication
+        // otherwise consecutiveFourPrimeDivisors is reset to 0
         
         if(consecutiveFourPrimeDivisors == 4) {
             return i - 3;
