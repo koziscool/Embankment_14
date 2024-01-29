@@ -268,7 +268,7 @@ long int e47(){
         for(; !(remainder & 1); remainder >>= 1);
 
         //  divide out all factors of 2 from remainder until what's left is odd
-
+        //  semicolon at the end means inside for loop is no-op
         
         for(long int j = 3; j*j < remainder; j += 2) {
 
@@ -297,6 +297,30 @@ long int e47(){
             return i - 3;
         }
     }
+}
+
+long int e50(vector<long int>* primes, long int  limit){
+   
+    long int maxLength = 0, maxLengthSum;
+    for( long int primesIndex = 0; primesIndex < primes->size(); primesIndex++ ){
+
+        long int p = primes->at(primesIndex);
+        if( p > limit )
+            break;
+            
+        long int primeSum = p, primeSumIndex = primesIndex, primeSumLength = 1;
+
+        while( primeSum < limit ){
+            primeSumIndex += 1;
+            primeSum += primes->at(primeSumIndex);
+            primeSumLength += 1;
+            if( isPrime(primeSum)  && primeSumLength > maxLength ){
+                maxLength = primeSumLength;
+                maxLengthSum = primeSum;
+            }
+        }
+    } 
+    return  maxLengthSum;
 }
 
 
@@ -334,6 +358,7 @@ int main(){
     cout << "e42:    " << e42() << endl;
     cout << "e46:    " << e46(&primes) << endl;
     cout << "e47:    " << e47() << endl;
+    cout << "e50:    " << e50( &primes, pow(10,6) ) << endl;
 
     auto finish = chrono::steady_clock::now();
     auto duration_problems = chrono::duration<double, std::milli>(finish - start_problems);

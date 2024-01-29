@@ -25,6 +25,20 @@ void printMap(map<long int, int> a){
     cout << endl;
 }
 
+bool isPrime(long int number){
+    if (number != 2){
+        if (number < 2 || number % 2 == 0) {
+            return false;
+        }
+        for(long int i=3; (i*i)<=number; i+=2){
+            if(number % i == 0 ){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 void Eratosthenes(vector<long int>* primes, long int limit){
 
     vector<bool> primeArray(limit, true);
