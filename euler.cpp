@@ -337,6 +337,19 @@ long int e50(vector<long int>* primes, long int  limit){
     return  maxLengthSum;
 }
 
+long int e71(long int limit){
+
+    long int retNumerator = 2, retDenominator = 5;
+    for( long int newDenominator = 9; newDenominator <= limit; newDenominator++ ){
+        long int newNumerator =  newDenominator * 3 / 7;
+        if( newNumerator / double(newDenominator) > retNumerator / double(retDenominator) )
+            if( gcd( newDenominator, newNumerator ) == 1 )
+                tie(retNumerator, retDenominator) = make_tuple(newNumerator, newDenominator);
+    }
+
+    return retNumerator;
+}
+
 long int e73(long int limit){
     long int retTotal = 0;
     for (long int d = 3; d <= limit; d++){
@@ -384,6 +397,7 @@ int main(){
     cout << "e46:    " << e46(&primes) << endl;
     cout << "e47:    " << e47() << endl;
     cout << "e50:    " << e50( &primes, pow(10,6) ) << endl;
+    cout << "e71:    " << e71(pow(10,6)) << endl;
     cout << "e73:    " << e73(12000) << endl;
 
     auto finish = chrono::steady_clock::now();

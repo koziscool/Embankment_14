@@ -17,5 +17,5 @@ long int numFactors( vector<long int> *primes, long int n );
 
 long int wordScore(string s);
 
-long int gcd( long int a, long int b );
+long int gcd( long int a, long int b );  // assume a >= b and a and b > 0 
 

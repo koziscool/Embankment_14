@@ -16,7 +16,6 @@
 #include <tuple>
 // make_tuple, tic
 
-
 #include "utils.h"
 
 using namespace std;
@@ -105,7 +104,6 @@ long int wordScore(string s){
     return retTotal;
 }
 
-// assume a >= b and a and b > 0 
 long int gcd( long int a, long int b ){  
     while( a % b > 0 )
         tie(a, b) = make_tuple(b, a % b);
