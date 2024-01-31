@@ -382,15 +382,48 @@ long int e91(long int limit){
     }
 
     return 3 * limit * limit + numtriangles ;
+
+    // ### the 3 limit^2 are as follows:
+    
+    // ### p is any point on the x axis (!=0) and q is any point on the y axis
+    // ### also != 0.  This creats a right triangle w a right angle at the origin
+    // ### limit^2
+    
+    // ### p is any point on the x axis and q is any point directly above p,
+    // ### a right triangle with a right angle on the x axis
+    // ### similarly if p is a point on the y-axis
+    
+    // ### num triangles counts the other triangles where this is a right angle
+    // ### in the interior of the grid.  It's verified by m1 * m2 == -1
+    // ### for perpendicular lines.
+}
+
+
+long int e99(){
+    ifstream file("e99data.txt");
+    string s;
+    int idx = 0, argmax, base, exp;
+    double max = 0;
+
+    while (getline(file, s))
+    {
+        idx += 1;
+        int pos = s.find(',');
+        base = stoi(s.substr(0,pos));
+        exp = stoi(s.substr(pos + 1));
+        if ( exp * log(base) > max ){
+            max = exp * log(base);
+            argmax = idx;
+        }
+    }
+
+    return argmax;
 }
 
 
 int main(){
 
     auto start = chrono::steady_clock::now();
-
-    vector<long int> little_primes;
-    Eratosthenes(&little_primes, 100);
 
     vector<long int> primes;
     Eratosthenes(&primes, pow(10, 7));
@@ -423,6 +456,7 @@ int main(){
     cout << "e71:    " << e71(pow(10,6)) << endl;
     cout << "e73:    " << e73(12000) << endl;
     cout << "e91:    " << e91(50) << endl;
+    cout << "e99:    " << e99() << endl;
 
     auto finish = chrono::steady_clock::now();
     auto duration_problems = chrono::duration<double, std::milli>(finish - start_problems);
