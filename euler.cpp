@@ -1,17 +1,29 @@
 
 #include <iostream>
-#include <chrono>
-#include <ctime>
-#include <cmath>
-#include <utility>
-#include <vector>
-#include <fstream>
-#include <string>
-#include <algorithm>
-#include <set>
-#include <tuple>
-#include "utils.h"
+// cout 
 
+#include <chrono>
+// duration, clock functions
+
+#include <cmath>
+// sqrt, pow
+
+#include <vector>
+// vectors, obv
+
+#include <fstream>
+// file i/o
+
+#include <string>
+// strings, obv
+
+#include <algorithm>
+// sort, find
+
+#include <tuple>
+// tuple, tie
+
+#include "utils.h"
 
 using namespace std;
 
@@ -217,13 +229,14 @@ long int e42(){
         words.push_back(s);
     }
 
-    set<long int> triangleNumbers;
+    vector<long int> triangleNumbers;
     for(int i = 1; i <= maxTriangle; i++){
-        triangleNumbers.insert( i*(i+1)/2 );
+        triangleNumbers.push_back( i*(i+1)/2 );
     }
 
     for( string word: words){
-        if( triangleNumbers.find( wordScore(word) )  != triangleNumbers.end() )
+        if( find( triangleNumbers.begin(), triangleNumbers.end(), wordScore(word) )
+                      != triangleNumbers.end() )
             retCounter++;
     }
     return retCounter;

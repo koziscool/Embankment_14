@@ -1,10 +1,21 @@
 
 #include <vector>
+// vectors, obv
+
 #include <iostream>
+// cout
+
 #include <cmath>
+// sqrt, pow
 #include <map>
+// maps, ie hash tables
+
 #include <string>
+// strings, obv
+
 #include <tuple>
+// make_tuple, tic
+
 
 #include "utils.h"
 
