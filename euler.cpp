@@ -362,6 +362,29 @@ long int e73(long int limit){
     return retTotal;
 }
 
+long int e91(long int limit){
+
+    long int numtriangles = 0;
+    for( int x1 = 1; x1 <= limit; x1++ ){
+        for(int y1 = 1; y1 <= limit; y1++ ){
+            double m1 = y1 / double(x1);
+            for(int x2 = 0; x2 <= limit; x2++ ){
+                for(int  y2 = 0; y2 <= limit; y2++ ){
+                    if( x2 != x1 ){
+                        double m2 = (y2 - y1) / double(x2 - x1);
+                        if( abs(m1 * m2 + 1) < 0.0001 )
+                            numtriangles += 1;
+                    }
+                
+                }
+            }
+        }
+    }
+
+    return 3 * limit * limit + numtriangles ;
+}
+
+
 int main(){
 
     auto start = chrono::steady_clock::now();
@@ -399,6 +422,7 @@ int main(){
     cout << "e50:    " << e50( &primes, pow(10,6) ) << endl;
     cout << "e71:    " << e71(pow(10,6)) << endl;
     cout << "e73:    " << e73(12000) << endl;
+    cout << "e91:    " << e91(50) << endl;
 
     auto finish = chrono::steady_clock::now();
     auto duration_problems = chrono::duration<double, std::milli>(finish - start_problems);
