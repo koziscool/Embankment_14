@@ -4,6 +4,7 @@
 #include <cmath>
 #include <map>
 #include <string>
+#include <tuple>
 
 #include "utils.h"
 
@@ -93,4 +94,9 @@ long int wordScore(string s){
     return retTotal;
 }
 
-
+// assume a >= b and a and b > 0 
+long int gcd( long int a, long int b ){  
+    while( a % b > 0 )
+        tie(a, b) = make_tuple(b, a % b);
+    return b;
+}

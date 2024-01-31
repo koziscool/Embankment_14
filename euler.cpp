@@ -9,6 +9,7 @@
 #include <string>
 #include <algorithm>
 #include <set>
+#include <tuple>
 #include "utils.h"
 
 
@@ -25,13 +26,13 @@ int e1(int limit){
 }
 
 int e2(int limit){
-    int total = 0;
-    pair<int, int> f(1,2);
-    
-    while (f.second <= limit){
-        if(f.second % 2 == 0)
-            total += f.second;
-        f = { f.second, f.first + f.second };
+    long int total = 0, first, second;
+    tie(first, second) = make_tuple(1,2);
+
+    while (second <= limit){
+        if(second % 2 == 0)
+            total += second;
+        tie(first, second) = make_tuple(second, first + second);
     }
     
     return total;
@@ -314,7 +315,7 @@ long int e50(vector<long int>* primes, long int  limit){
             primeSumIndex += 1;
             primeSum += primes->at(primeSumIndex);
             primeSumLength += 1;
-            if( isPrime(primeSum)  && primeSumLength > maxLength ){
+            if( isPrime(primeSum) && primeSumLength > maxLength ){
                 maxLength = primeSumLength;
                 maxLengthSum = primeSum;
             }
@@ -323,6 +324,17 @@ long int e50(vector<long int>* primes, long int  limit){
     return  maxLengthSum;
 }
 
+long int e73(long int limit){
+    long int retTotal = 0;
+    for (long int d = 3; d <= limit; d++){
+        for( long int n  =  d/3 + 1; n <= d/2; n++ ){
+            if( gcd( n, d ) == 1 )
+                retTotal += 1;
+        }
+    }
+
+    return retTotal;
+}
 
 int main(){
 
@@ -345,7 +357,7 @@ int main(){
 
     cout << "e1:     " << e1(1000) << endl;
     cout << "e2:     " << e2(4 * pow(10,6)) << endl;
-    cout << "e5:     " << e3(&primes, 600851475143) << endl;
+    cout << "e3:     " << e3(&primes, 600851475143) << endl;
     cout << "e5:     " << e5(20) << endl;
     cout << "e7:     " << e7(&primes, 10001) << endl;
     cout << "e8:     " << e8(13) << endl;
@@ -359,6 +371,7 @@ int main(){
     cout << "e46:    " << e46(&primes) << endl;
     cout << "e47:    " << e47() << endl;
     cout << "e50:    " << e50( &primes, pow(10,6) ) << endl;
+    cout << "e73:    " << e73(12000) << endl;
 
     auto finish = chrono::steady_clock::now();
     auto duration_problems = chrono::duration<double, std::milli>(finish - start_problems);
